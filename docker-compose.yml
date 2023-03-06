@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+# mysql1:
+#  image: mysql:5.7
+#  container_name: db1
+#  volumes:
+#   - /Users/ralph/classes/353/dbfiles:/var/lib/mysql
+#  environment:
+#    MYSQL_ROOT_PASSWORD: admin
+#  healthcheck:
+#   test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-padmin"]
+#   timeout: 20s # Timeout for each health checking.
+#   retries: 10 # Hou many times retries.
+ node1:
+  build: .
+  container_name: nodejs1
+  ports:
+   - "80:3000"
+  volumes:
+   - ./:/code
+#  depends_on:
+#   mysql1: 
+#    condition: service_healthy
+  stdin_open: true
+  tty: true
+  working_dir: /code
+ node2:
+  build: .
+  container_name: nodejs2
+  ports:
+   - "81:3000"
+  volumes:
+   - ./:/code
+#  depends_on:
+#   mysql1: 
+#    condition: service_healthy
+  stdin_open: true
+  tty: true
+  working_dir: /code
+ 
